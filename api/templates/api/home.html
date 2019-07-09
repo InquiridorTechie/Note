@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1 align="center"> Notes </h1>
+{% for note in notes %}
+        <table border="1px solid black">
+         <tr>
+            <td>{{ note.title }}</td>
+            <td>{{ note.body }}</td>
+         </tr>
+        </table>
+{% endfor %}
+</body>
+</html>
