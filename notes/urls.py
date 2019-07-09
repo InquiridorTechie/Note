@@ -23,4 +23,5 @@ note_resource = NoteResource()
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(note_resource.urls)),
+    path('notes/', include('api.urls')),
 ]
