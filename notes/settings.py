@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'admin_reorder',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'notes.urls'
@@ -119,3 +121,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ADMIN_REORDER = (
+    # Keep original label and models
+    'sites',
+
+    # Rename app
+    {'app': 'api', 'label': 'API'},
+
+'''
+    # Reorder app models
+    {'app': 'auth', 'models': ('auth.User', 'auth.Group')},
+
+    # Exclude models
+    {'app': 'auth', 'models': ('auth.User', )},
+
+    # Cross-linked models
+    {'app': 'auth', 'models': ('auth.User', 'sites.Site')},
+
+    # models with custom name
+    {'app': 'auth', 'models': (
+        'auth.Group',
+        {'model': 'auth.User', 'label': 'Staff'},
+    )},
+'''
+)
